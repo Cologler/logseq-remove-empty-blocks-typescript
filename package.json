@@ -1,0 +1,24 @@
+{
+  "name": "logseq-remove-empty-blocks",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "vite build",
+    "build-watch": "vite build --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "logseq"
+  ],
+  "author": "Cologler",
+  "license": "MIT",
+  "devDependencies": {
+    "@logseq/libs": "^0.0.15",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.7"
+  },
+  "logseq": {
+    "id": "logseq-remove-empty-blocks"
+  }
+}

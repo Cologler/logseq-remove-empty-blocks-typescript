@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v3
 
@@ -41,27 +44,15 @@ jobs:
 
       - name: Create Release
         uses: ncipollo/release-action@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ github.ref }}
-        with:
-          allowUpdates: true
-          draft: false
-          prerelease: false
 
       - name: Upload zip file
         id: upload_zip
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: ${{ env.PLUGIN_NAME }}.zip
 
       - name: Upload package.json
         id: upload_metadata
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: package.json

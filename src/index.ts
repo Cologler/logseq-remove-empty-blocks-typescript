@@ -3,7 +3,8 @@ import { BlockEntity } from "@logseq/libs/dist/LSPlugin";
 
 async function main () {
     /**
-     * Returns true if the block tree is empty
+     * Returns true if the block tree is empty,
+     * won't remove itself
      */
     async function walk(block: BlockEntity) {
         if (!block.children) {
@@ -39,6 +40,23 @@ async function main () {
             const block = await logseq.Editor.getBlock(e.uuid, { includeChildren: true });
             if (block) {
                 await walk(block);
+            }
+        }) as any
+    );
+
+    logseq.beforeunload(
+        logseq.App.registerPageMenuItem('Remove empty blocks', async ({ page }) => {
+
+            // `logseq.Editor.getPage(page, { includeChildren: true });`
+            // will return a null children
+
+            const blocks = await logseq.Editor.getPageBlocksTree(page);
+            if (blocks.length) {
+                for (const block of blocks) {
+                    if (await walk(block)) {
+                        await logseq.Editor.removeBlock(block.uuid);
+                    }
+                }
             }
         }) as any
     );

@@ -1,5 +1,9 @@
 # Logseq Plugin: *remove-empty-blocks*
 
+**Logseq has a ton of unfixed bugs and isn't ready for production use at all.  Archiving this project because I've switched to another note-taking application.**
+
+---
+
 - Added block context menu item `Remove empty blocks` to remove empty blocks.
 
 ## Install from Logeq marketplace
